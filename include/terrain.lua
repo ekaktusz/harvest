@@ -1,7 +1,7 @@
 function init_terrain()
     terrain = get_all_coords_for_spriten(14)
 
-    summer_options = {138, 139, 154, 155}
+    summer_options = {138, 139, 154, 155, 14, 14, 14, 14}
     summer_options_end = {170, 171, 186, 187}
     fall_options = {140, 141, 156, 157}
     fall_options_end = {172, 173, 188, 189}
