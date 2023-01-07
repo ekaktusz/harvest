@@ -1,7 +1,7 @@
 function init_bear()
     bear = {
-        x = 100,
-        y = 128,
+        x = cave.x-10,
+        y = cave.y+12,
         dx = 0,
         dy = 0,
         w = 15,
@@ -11,7 +11,7 @@ function init_bear()
         spr = 0,
         speed = 0.6,
         num_eaten = 0,
-        anim = init_animation(0, 11, 14),
+        anim = init_animation(0, 16, 10),
         level = 0,
         angle = 0,
         freezed = false,
@@ -23,7 +23,7 @@ end
 function draw_bear()
     --spr(bear.spr, bear.x, bear.y, 2, 2, bear.last_dir==0, false)
     if bear.level == 0 then
-        sspr(bear.anim.current_frame*8,0,16,16,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        sspr(bear.anim.current_frame,16,16,16,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
     elseif bear.level == 1 then
         sspr(bear.anim.current_frame,32,32,32,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
     elseif bear.level == 2 then
@@ -115,7 +115,7 @@ function update_controls_bear()
         bear.dy+=bear.speed
     end
     if btnp(4) then
-        bear_collide_with_objs(apples, bear_collide_with_apple)
+        bear_collide_with_objs(foods, bear_collide_with_food)
     end
 
 end
@@ -133,7 +133,7 @@ function can_move(x, y, w, h)
     pset(x+w,y,8)
     pset(x,y+h,8)
     pset(x+w,y+h,8)
-    
+
     if (solid(x,y) or solid_on_coord(x,y)) return false
     if (solid(x+w,y) or solid_on_coord(x+w,y)) return false
     if (solid(x,y+h)or solid_on_coord(x,y+h)) return false

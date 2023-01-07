@@ -12,7 +12,7 @@ function init_trees()
 	table_concat(trees,trees_4)
 	table_concat(trees,trees_5)
 
-    trees = array_reverse(trees)
+    --trees = array_reverse(trees)
 
     eaten_trees = {}
 end
