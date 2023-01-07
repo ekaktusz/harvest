@@ -13,9 +13,6 @@ end
 function draw_bear()
     spr(bear.spr, bear.x, bear.y, 2, 2, bear.last_dir==0, false)
 
-    if is_bear_on_flag(2) then
-        print('on')
-    end
 end
 
 function update_bear()
@@ -55,9 +52,7 @@ function update_controls_bear()
         bear.dy+=1 
     end
     if btnp(4) then
-        if is_bear_on_flag(2) then
-            set_tile_to(bear.x,bear.y,26)
-        end 
+        bear_collide_with_objs(apples, bear_collide_with_apple)
     end
 end
 
@@ -76,24 +71,3 @@ function can_move(x, y, w, h)
     if (solid(x+w,y+h)) return false
 	return true
 end
-
-function is_bear_on_flag(flag)
-    if (flag_on_tile(bear.x,bear.y,flag)) return true
-    if (flag_on_tile(bear.x+bear.w,bear.y,flag)) return true
-    if (flag_on_tile(bear.x,bear.y+bear.h,flag)) return true
-    if (flag_on_tile(bear.x+bear.w,bear.y+bear.h,flag)) return true
-    if (flag_on_tile(bear.x+bear.w/2,bear.y+bear.h/2,flag)) return true
-	return false
-end
-
-function solid(x,y)
-    return flag_on_tile(x,y,1)
-end
-
-function flag_on_tile(x,y,flag)
-    local map_x = flr(x/8)
-    local map_y = flr(y/8)
-    local map_sprite = mget(map_x, map_y)
-    return fget(map_sprite)==flag
-end
-
