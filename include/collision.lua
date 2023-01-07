@@ -1,8 +1,8 @@
 function bear_collide_with_obj(obj)
     local bx1 = bear.x
-    local bx2 = bear.x + bear.w
+    local bx2 = bear.x + bear.w + bear.num_eaten
     local by1 = bear.y
-    local by2 = bear.y + bear.h
+    local by2 = bear.y + bear.h + bear.num_eaten
     local ox1 = obj.x
     local ox2 = obj.x + obj.w
     local oy1 = obj.y

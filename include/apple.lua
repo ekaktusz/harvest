@@ -20,4 +20,5 @@ function bear_collide_with_apple(apple)
     apple_copy = {x=apple.x, y=apple.y, w=apple.w, h=apple.h, sprite=26}
     add(eaten_apples, apple_copy)
     del(apples, apple)
+    bear.num_eaten += 1
 end
