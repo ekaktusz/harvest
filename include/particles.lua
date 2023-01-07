@@ -54,6 +54,7 @@ function update_snow_parts()
         p.y += p.g
         p.x += p.dx
         p.age += 1
+        
         if (type(bear) == "table" and p.y > 200) or (type(bear) != "table" and p.y > 128) or (p.age > p.mage) then
             del(snow_parts, p)
         end
@@ -84,4 +85,65 @@ end
 
 function clear_snow()
     snow_parts = {}
+end
+
+function init_sparks()
+    sparks={}
+
+    for i=1,200 do
+        add(sparks,{
+            x=0,y=0,velx=0,
+            vely=0,r=0,alive=false,mass=0
+        })
+    end
+end
+
+function explode(x,y,r,particles)
+	--creates a exposion particle emitter
+	--x,y: emitter location
+	--r:maximum particle radius
+	--particles: particles to be spanwned
+	local selected=0//count current spawned particles
+	for i=1,#sparks do
+		if not sparks[i].alive then	-- check if spakrs{} table has any empty particle slots		
+			--setup each particle's property
+			sparks[i].x=x
+			sparks[i].y=y
+			sparks[i].velx= -1+rnd(2)
+			sparks[i].vely= -1+rnd(2)
+			sparks[i].mass= 0.5+rnd(2)
+			sparks[i].r= 0.5+rnd(r)
+			sparks[i].alive=true
+			selected+=1
+			if selected==particles then
+				break end
+		end
+	end
+end
+
+function update_explode()
+	for i=1,#sparks do
+		if sparks[i].alive then
+			sparks[i].x+=sparks[i].velx / sparks[i].mass
+			sparks[i].y+=sparks[i].vely / sparks[i].mass
+			sparks[i].r-=0.4
+			if sparks[i].r<0.1then--kill particle when too small
+				sparks[i].alive=false
+			end
+		end
+	end
+end
+
+function draw_explode()
+    for i=1, #sparks do
+		if sparks[i].alive then
+			circfill(
+                sparks[i].x, --x pos
+                sparks[i].y, --y pos
+                sparks[i].r, --radius
+                --5+rnd(5) --color
+                7
+			)
+	    end
+	end
 end

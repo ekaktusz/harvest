@@ -29,7 +29,7 @@ end
 
 function solid_on_coord(x,y)
     for tree in all(trees) do
-        if (x > tree.x and x < tree.x + tree.w) and (y > tree.y + tree.h/2 and y < tree.y + tree.h) then
+        if bear_collide_with_obj(tree) then
             return true
         end
     end

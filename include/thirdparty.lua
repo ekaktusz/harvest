@@ -201,3 +201,40 @@ function array_reverse(x)
     end
     return x
 end
+
+function draw_rotated_tile(x,y,rot,mx,my,w,flip,scale)
+	scale = scale or 1
+	w+=.8
+	local halfw, cx  = scale*-w/2, mx + w/2 -.4
+	local cs, ss, cy = cos(rot)/scale, -sin(rot)/scale, my-halfw/scale-.4
+	local sx, sy, hx, hy = cx + cs*halfw, cy - ss*halfw, w*(flip and -4 or 4)*scale, w*4*scale
+	
+	--rect(x-hx,y-hy,x+hx,y+hy,5)
+  
+	for py = y-hy, y+hy do
+	  tline(x-hx, py, x+hx, py, sx + ss*halfw, sy + cs*halfw, cs/8, -ss/8)
+	  halfw+=1/8
+	end
+end
+
+
+
+--97 tokens with Scaling and arbitrary size
+function pd_rotate(x,y,rot,mx,my,w,flip,scale)
+	scale=scale or 1
+	w*=scale*4
+  
+	local cs, ss = cos(rot)*.125/scale,sin(rot)*.125/scale
+	local sx, sy = mx+cs*-w, my+ss*-w
+	local hx = flip and -w or w
+  
+	local halfw = -w
+	for py=y-w, y+w do
+	  tline(x-hx, py, x+hx, py, sx-ss*halfw, sy+cs*halfw, cs, ss)
+	  halfw+=1
+	end
+  end
+
+function dist(x1,y1,x2,y2)
+	return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1))
+end

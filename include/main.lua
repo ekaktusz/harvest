@@ -2,7 +2,7 @@ function _init()
     init_menu()
 end
 
-function _update()
+function _update60()
     
 end
 
