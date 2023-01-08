@@ -50,7 +50,7 @@ end
 
 function update_snow_parts()
     for p in all(snow_parts) do
-        --p.dy += p.g
+        p.dy += p.g
         local ang = rnd()
         local ox = sin(ang)*0.5
         p.dx = ox
@@ -71,8 +71,8 @@ function spawn_snow(intensitiy)
     local mage = 500
     
     if type(bear) == "table" then
-        ox = 500
-        oy = 200
+        ox = map_size_x
+        oy = map_size_y
         m = 10
     end
     
