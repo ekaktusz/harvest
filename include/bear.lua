@@ -72,11 +72,12 @@ function update_bear()
     if current_level == "forest" then
         if (can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)) and bear.dx != 0 then
             bear.x+=bear.dx
-            spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
+            spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h, 2, 2, 7, 7, 1, bear_parts, 30, 50)
             update_animation(bear.anim)
         end
         if (can_move(bear.x,bear.y+bear.dy,bear.real_w,bear.real_h)) and bear.dy != 0 then
             bear.y+=bear.dy
+            
             spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
             update_animation(bear.anim)
         end

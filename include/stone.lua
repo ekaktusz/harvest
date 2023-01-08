@@ -1,8 +1,7 @@
 function init_stones() 
     stones = get_all_coords_for_spriten(44, 2, 2)
     tree_log = get_all_coords_for_spriten(46, 2, 2)
-
-    table_concat(stones,tree_log)
+    --table_concat(stones,tree_log)
 end
 
 function draw_stones()

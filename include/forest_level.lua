@@ -16,6 +16,8 @@ function init_forest_level()
 
     map_size_x = 800
     map_size_y = 255
+
+    shake = 0
     
     current_level = "forest"
 end
@@ -42,6 +44,8 @@ function update_forest_level()
         bear.num_eaten = 0
         switch_to_space_level()
     end
+
+    doshake()
 end
 
 function draw_forest_level()
@@ -54,10 +58,11 @@ function draw_forest_level()
     draw_foods()
     draw_parts(bear_parts)
     draw_cave_bot()
+    draw_behind_trees()
     draw_bear()
     draw_cave_top()
     draw_mountains()
-    draw_trees()
+    draw_front_trees()
     draw_stones()
     
     if(bear.level >= 1) then

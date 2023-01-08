@@ -193,7 +193,7 @@ end
 
 function table_concat(t1,t2) --feltetelezzuk hogy object
     for i=1,#t2 do
-        t1[#t1+1] = {x=t2[i].x, y=t2[i].y, w=t2[i].w, h=t2[i].h, sprite=t2[i].sprite}
+        t1[#t1+1] = {x=t2[i].x, y=t2[i].y, w=t2[i].w, h=t2[i].h, sprite=t2[i].sprite, behind=t2[i].behind}
     end
     return t1
 end

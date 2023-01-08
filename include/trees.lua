@@ -11,18 +11,30 @@ function init_trees()
 	table_concat(trees,trees_3)
 	table_concat(trees,trees_4)
 	table_concat(trees,trees_5)
-
     --trees = array_reverse(trees)
-
     eaten_trees = {}
 end
 
-function draw_trees()
+function draw_front_trees()
     for tree in all(trees) do
-        spr(tree.sprite,tree.x,tree.y,2,4)
+        if not tree.behind then
+            spr(tree.sprite,tree.x,tree.y,2,4)
+        end
     end
-    for tree in all(eaten_trees) do
-        spr(tree.sprite,tree.x,tree.y,2,4)
-    end
+    --for tree in all(eaten_trees) do
+    --    spr(tree.sprite,tree.x,tree.y,2,4)
+    --end
 end
 
+function draw_behind_trees()
+    --print(count(trees))
+    for tree in all(trees) do
+        if tree.behind then
+            log("hehhh")
+            spr(tree.sprite,tree.x,tree.y,2,4)
+        end
+    end
+    --for tree in all(eaten_trees) do
+    --    spr(tree.sprite,tree.x,tree.y,2,4)
+    --end
+end
