@@ -30,7 +30,11 @@ function draw_bear()
     elseif bear.level == 2 then
         --rspr(32,bear.x,bear.y,bear.angle,4,4)
         --draw_rotated_tile(bear.x, bear.y, 0/360,  121, 26, 4,false,1)
-        pd_rotate(bear.x, bear.y, bear.rot/360,  123, 28, 5,false,1+bear.num_eaten/5)
+        if current_level == "space" then
+            pd_rotate(bear.x, bear.y, bear.rot/360,  123, 28, 5,false,1+bear.num_eaten/5)
+        else
+            pd_rotate(bear.x, bear.y, 0/360,  121, 26, 8,false,1)
+        end
     end
 end
 
@@ -101,6 +105,9 @@ function update_bear()
     end
 
     if bear.num_eaten > 3 and bear.level == 1 then
+        bear.num_eaten = 0
+        bear.anim.time = 15
+        bear.freezed = true
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,100,100)
         bear.level += 1
     end

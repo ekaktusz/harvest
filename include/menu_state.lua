@@ -5,7 +5,6 @@ local test_x = -20
 function init_menu()
     _update60=update_menu
     _draw = draw_menu
-    
 end
 
 function update_menu()

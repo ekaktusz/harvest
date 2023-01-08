@@ -31,6 +31,11 @@ function update_forest_level()
     end
 
     update_explode()
+
+    if bear.level >=2 and bear.num_eaten >= 2 then
+        bear.num_eaten = 0
+        switch_to_space_level()
+    end
 end
 
 function draw_forest_level()
@@ -51,6 +56,8 @@ function draw_forest_level()
     if(bear.level >= 1) then
         draw_parts(snow_parts)
     end
+
+    
 
     draw_explode()
     tb_draw(tb_1)

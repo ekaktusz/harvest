@@ -8,6 +8,7 @@ function init_space_level()
     current_level = "space"
     bear.level = 2
     finished = false
+    shake = 0
     
     sstar_init()
 end
@@ -47,9 +48,9 @@ function draw_space_level()
     cls(0)
 
     --camera_follow_bear()
-    for star in all(space.background_stars) do
-        pset(star.x,star.y,star.c)
-    end
+    --for star in all(space.background_stars) do
+    --    pset(star.x,star.y,star.c)
+    --end
     
     sstar_draw()
 
@@ -70,19 +71,25 @@ function draw_space_level()
     end
     --log(current_level)
 
-    draw_explode(5+rnd(5))
+    draw_explode()
+    doshake()
 end
 
 function update_space_level()
     --update_bear()
     --update_parts(bear_parts)
-    update_controls_bear()
-    sstar_update()
+    
+    if not finished then
+        update_controls_bear()
+        sstar_update()
+    end
+
     update_explode(0.1)
 
-    if bear.num_eaten >= 1 and space.anim_time >0  then
+    if bear.num_eaten >= 5 and space.anim_time >0  then
         finished = true
         explode(63,63,bear.w,500,300)
+        shake+=0.02
         space.anim_time -= 1
     end
 end

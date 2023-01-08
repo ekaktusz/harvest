@@ -286,12 +286,11 @@ function sstar_update()
     local vx,vy=cam.vx,cam.vy
     cam.x+=vx
     cam.y+=vy
-	if not space.finished then
-		if(btn(⬅️))vx+=sp
-		if(btn(➡️))vx-=sp
-		if(btn(⬆️))vy+=sp
-		if(btn(⬇️))vy-=sp
-	end
+	
+	if(btn(⬅️))vx+=sp
+	if(btn(➡️))vx-=sp
+	if(btn(⬆️))vy+=sp
+	if(btn(⬇️))vy-=sp
 
     local vsq=vx*vx+vy*vy
     -- normalise vel
@@ -306,6 +305,7 @@ function sstar_update()
 			if (dist(bear.x,bear.y,planet.x,planet.y) < 16 + planet.r) then
 				del(space.planets,planet)
 				bear.num_eaten+=1
+				shake += 0.1
 			end
 		end
 	end
@@ -315,6 +315,9 @@ function sstar_update()
 		planet.y+=vy
     end
 
+	bear.x = 63 + cam.vx
+    bear.y = 63 + cam.vy
+
     cam.vx,cam.vy=vx,vy
 end
 
@@ -322,9 +325,6 @@ function sstar_draw()
     --cls()
     --for i=0,20 do rectfill(rnd(136)-4,rnd(136)-4,2,2,0)end
     --line(63,63,63+cam.vx,63+cam.vy,8)
-
-	bear.x = 63 + cam.vx
-    bear.y = 63 + cam.vy 
     
     for j=0,l2 do
         --camera(cam.x/j,cam.y/j)
