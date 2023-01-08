@@ -10,6 +10,7 @@ function init_forest_level()
     init_mountains()
     init_stones()
     init_water()
+    init_hitboxes()
     snowing = false
     tb_1 = tb_init({"asdasdasdasdasda"})
 
@@ -68,4 +69,6 @@ function draw_forest_level()
     tb_draw(tb_1)
 
     pset(cam_x+64,cam_y+64,8)
+
+    draw_hitboxes()
 end

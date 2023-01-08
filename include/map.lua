@@ -38,6 +38,12 @@ function solid_on_coord(x,y)
     --    end
     --end
 
+    for h in all(hitboxes) do
+        if bear_collide_with_obj(h) then
+            return true
+        end
+    end
+
     cave_solid1 = {x=cave.x,y=cave.y+5, w=cave.w*4/5, h=5}
     cave_solid2 = {x=cave.x,y=cave.y+cave.h-3, w=cave.w*4/5, h=3}
     --draw_hitbox(cave_solid1)
