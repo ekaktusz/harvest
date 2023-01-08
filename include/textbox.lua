@@ -42,8 +42,8 @@ function tb_update(tb)  -- this function handles the text box on every frame upd
         tb.reading=false
     end
 
-    cam_x = bear.x - 64 + flr(bear.w / 2)
-    cam_y = bear.y - 64 + flr(bear.h / 2)
+    cam_x = bear.x - 64 + flr(bear.real_w / 2)
+    cam_y = bear.y - 64 + flr(bear.real_h / 2)
     cam_x = mid(0,cam_x,896) 
     cam_y = mid(0,cam_y,128) 
 
