@@ -1,10 +1,14 @@
 function init_space_level()
     space = {
         background_stars = init_stars(),
-        planets = init_planets()
+        planets = init_planets(),
+        anim_time = 60,
+        anim_timer = 0
     }
     current_level = "space"
     bear.level = 2
+    finished = false
+    
     sstar_init()
 end
 
@@ -41,21 +45,32 @@ end
 
 function draw_space_level()
     cls(0)
-    camera_follow_bear()
+
+    --camera_follow_bear()
     for star in all(space.background_stars) do
         pset(star.x,star.y,star.c)
     end
-    for planet in all(space.planets) do
-        circfill(planet.x, planet.y, planet.r, planet.c)
-        --circfill(planet.x+1, planet.y+1, planet.r-2, planet.c+1)
-    end
-
-    draw_parts(bear_parts)
-    draw_bear()
-
     
     sstar_draw()
+
+    if not finished then
+        draw_parts(bear_parts)
+        draw_bear()
+    end
+
+    if finished and space.anim_time < 20 then
+        draw_constellation()
+    end
+
+    if not finished then
+        for planet in all(space.planets) do
+            circfill(planet.x, planet.y, planet.r, planet.c)
+            --circfill(planet.x+1, planet.y+1, planet.r-2, planet.c+1)
+        end
+    end
     --log(current_level)
+
+    draw_explode(5+rnd(5))
 end
 
 function update_space_level()
@@ -63,5 +78,11 @@ function update_space_level()
     --update_parts(bear_parts)
     update_controls_bear()
     sstar_update()
-end
+    update_explode(0.1)
 
+    if bear.num_eaten >= 1 and space.anim_time >0  then
+        finished = true
+        explode(63,63,bear.w,500,300)
+        space.anim_time -= 1
+    end
+end

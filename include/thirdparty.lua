@@ -240,7 +240,16 @@ function pd_rotate(x,y,rot,mx,my,w,flip,scale)
   end
 
 function dist(x1,y1,x2,y2)
-	return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1))
+	--return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1))
+	local xdif=x1-x2
+    local ydif=y1-y2
+
+    local atan=atan2(xdif,ydif)
+
+    local xdist=cos(atan)*xdif
+    local ydist=sin(atan)*ydif
+
+    return xdist+ydist
 end
 
 function clear_table(t)
@@ -251,28 +260,38 @@ end
 
 
 function sstar_init()
-    sp,dim,l,msp=.02,500,6,3
+    sp,dim,l,msp=.05,500,6,1.5
+	l2=0
     spsq=msp*msp
     cam={x=rnd(dim),y=rnd(dim),vx=0,vy=0}
     stars={}
+	planets={}
     for i=0,l do
         stars[i]={}
+		planets[i]={}
     end
     for i=1,20 do
         for j=0,l do
-            add(stars[j],{x=rnd(dim),y=rnd(dim),c=rnd(10)+6})
+            add(stars[j],{x=rnd(dim),y=rnd(dim),c=7})
         end
     end
+	--for i=1,1 do
+    --    for j=0,l2 do
+    --        add(planets[j],{x=rnd(dim),y=rnd(dim),c=7})
+    --    end
+    --end
 end
 
 function sstar_update()
     local vx,vy=cam.vx,cam.vy
     cam.x+=vx
     cam.y+=vy
-    if(btn(⬅️))vx+=sp
-    if(btn(➡️))vx-=sp
-    if(btn(⬆️))vy+=sp
-    if(btn(⬇️))vy-=sp
+	if not space.finished then
+		if(btn(⬅️))vx+=sp
+		if(btn(➡️))vx-=sp
+		if(btn(⬆️))vy+=sp
+		if(btn(⬇️))vy-=sp
+	end
 
     local vsq=vx*vx+vy*vy
     -- normalise vel
@@ -282,15 +301,45 @@ function sstar_update()
         vy*=vmul
     end
 
+	for planet in all(space.planets) do
+		if planet.x > 0 and planet.y < 128 and planet.y > 0 and planet.y < 128 then
+			if (dist(bear.x,bear.y,planet.x,planet.y) < 16 + planet.r) then
+				del(space.planets,planet)
+				bear.num_eaten+=1
+			end
+		end
+	end
+
+	for planet in all(space.planets) do
+        planet.x+=vx 
+		planet.y+=vy
+    end
+
     cam.vx,cam.vy=vx,vy
 end
 
 function sstar_draw()
-    cls()
+    --cls()
     --for i=0,20 do rectfill(rnd(136)-4,rnd(136)-4,2,2,0)end
     --line(63,63,63+cam.vx,63+cam.vy,8)
+
+	bear.x = 63 + cam.vx
+    bear.y = 63 + cam.vy 
     
-    for j=0,l do
+    for j=0,l2 do
+        --camera(cam.x/j,cam.y/j)
+        for i=1,#planets[j] do
+            s=planets[j][i]
+			
+			--circ(bear.x,bear.y,16,8) --bear hitbox
+
+			circfill((s.x+cam.x)%128,(s.y+cam.y)%128,3,s.c)
+
+			
+        end
+    end
+
+	for j=0,l do
         --camera(cam.x/j,cam.y/j)
         for i=1,#stars[j] do
             s=stars[j][i]
@@ -298,10 +347,7 @@ function sstar_draw()
         end
     end
 
-    bear.x = 63 + cam.vx
-    bear.y = 63 + cam.vy
+    --draw_bear()
 
-	print(bear.x)
-	print(bear.y)
-    draw_bear()
+	print(count(space.planets))
 end

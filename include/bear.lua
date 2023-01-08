@@ -30,7 +30,7 @@ function draw_bear()
     elseif bear.level == 2 then
         --rspr(32,bear.x,bear.y,bear.angle,4,4)
         --draw_rotated_tile(bear.x, bear.y, 0/360,  121, 26, 4,false,1)
-        pd_rotate(bear.x, bear.y, bear.rot/360,  123, 28, 5,false,1)
+        pd_rotate(bear.x, bear.y, bear.rot/360,  123, 28, 5,false,1+bear.num_eaten/5)
     end
 end
 
@@ -133,6 +133,12 @@ function update_controls_bear()
         end
         if btn(➡️) then
             bear.rot+=1
+        end
+        if btn(⬆️) then
+            bear.rot+=1
+        end
+        if btn(⬇️) then 
+            bear.rot-=1
         end
     end
 end

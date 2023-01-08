@@ -21,7 +21,7 @@ __lua__
 #include include/mountain.lua
 #include include/stone.lua
 #include include/water.lua
-
+#include include/constellation.lua
 
 __gfx__
 ee00eeeeeeee00eeeeeeeeeeeeeeeeeeeeeee444444eeeeeeeeee444444eeeeeeeeee444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee33333333eeeeeeee

@@ -124,20 +124,22 @@ function explode(x,y,r,particles)
 	end
 end
 
-function update_explode()
+function update_explode(spd)
+    local _spd = spd or 0.4
 	for i=1,#sparks do
 		if sparks[i].alive then
 			sparks[i].x+=sparks[i].velx / sparks[i].mass
 			sparks[i].y+=sparks[i].vely / sparks[i].mass
-			sparks[i].r-=0.4
-			if sparks[i].r<0.1then--kill particle when too small
+			sparks[i].r-=_spd
+			if sparks[i].r<0.1 then--kill particle when too small
 				sparks[i].alive=false
 			end
 		end
 	end
 end
 
-function draw_explode()
+function draw_explode(color)
+    local _color = color or 7
     for i=1, #sparks do
 		if sparks[i].alive then
 			circfill(
@@ -145,7 +147,7 @@ function draw_explode()
                 sparks[i].y, --y pos
                 sparks[i].r, --radius
                 --5+rnd(5) --color
-                7
+                _color
 			)
 	    end
 	end
