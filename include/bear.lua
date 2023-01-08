@@ -16,7 +16,8 @@ function init_bear()
         angle = 0,
         freezed = false,
         freeze_time = 20,
-        freeze_timer = 0
+        freeze_timer = 0,
+        rot = 0
     }
 end
 
@@ -29,9 +30,8 @@ function draw_bear()
     elseif bear.level == 2 then
         --rspr(32,bear.x,bear.y,bear.angle,4,4)
         --draw_rotated_tile(bear.x, bear.y, 0/360,  121, 26, 4,false,1)
-        pd_rotate(bear.x, bear.y, 0/360,  121, 26, 8,false,1)
+        pd_rotate(bear.x, bear.y, bear.rot/360,  123, 28, 5,false,1)
     end
-    can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)
 end
 
 function update_real_size()
@@ -53,8 +53,8 @@ function update_bear()
         end
         return
     end
+    
     update_real_size()
-
     update_controls_bear()
 
     if bear.dx != 0 and bear.dy == 0 then
@@ -65,15 +65,23 @@ function update_bear()
         bear.dy *= sqrt(2)
     end
 
-    if (can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)) and bear.dx != 0 then
+    if current_level == "forest" then
+        if (can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)) and bear.dx != 0 then
+            bear.x+=bear.dx
+            spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
+            update_animation(bear.anim)
+        end
+        if (can_move(bear.x,bear.y+bear.dy,bear.real_w,bear.real_h)) and bear.dy != 0 then
+            bear.y+=bear.dy
+            spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
+            update_animation(bear.anim)
+        end
+    elseif current_level == "space" then
         bear.x+=bear.dx
-        spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
-        update_animation(bear.anim)
-    end
-    if (can_move(bear.x,bear.y+bear.dy,bear.real_w,bear.real_h)) and bear.dy != 0 then
         bear.y+=bear.dy
-        spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
-        update_animation(bear.anim)
+        if bear.dx != 0 or bear.dy != 0 then
+            spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, bear.real_w/3, bear.real_h/3, 5+rnd(5), 5+rnd(5), 1, bear_parts, 30, 50)
+        end
     end
 
     if bear.num_eaten > 3 and bear.level == 0 then
@@ -88,6 +96,7 @@ function update_bear()
         bear.num_eaten = 0
         bear.anim.time = 15
         bear.freezed = true
+        snowing = true
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
     end
 
@@ -100,24 +109,32 @@ function update_bear()
 end
 
 function update_controls_bear()
-    if btn(⬅️) then 
-        bear.dx-=bear.speed
-        bear.last_dir = 0
+    if current_level == "forest" then
+        if btn(⬅️) then 
+            bear.dx-=bear.speed
+            bear.last_dir = 0
+        end
+        if btn(⬆️) then
+            bear.dy-=bear.speed
+        end
+        if btn(➡️) then
+            bear.dx+=bear.speed
+            bear.last_dir = 1
+        end
+        if btn(⬇️) then 
+            bear.dy+=bear.speed
+        end
+        if btnp(4) then
+            bear_collide_with_objs(foods, bear_collide_with_food)
+        end
+    else
+        if btn(⬅️) then 
+            bear.rot-=1
+        end
+        if btn(➡️) then
+            bear.rot+=1
+        end
     end
-	if btn(⬆️) then
-        bear.dy-=bear.speed
-    end
-	if btn(➡️) then
-        bear.dx+=bear.speed
-        bear.last_dir = 1
-    end
-	if btn(⬇️) then 
-        bear.dy+=bear.speed
-    end
-    if btnp(4) then
-        bear_collide_with_objs(foods, bear_collide_with_food)
-    end
-
 end
 
 function camera_follow_bear()

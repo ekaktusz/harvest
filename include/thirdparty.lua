@@ -187,6 +187,10 @@ function get_rand(min,max)
     return min + flr(rnd(max - min))
 end
 
+function get_rand_f(min,max)
+    return min + rnd(max - min)
+end
+
 function table_concat(t1,t2) --feltetelezzuk hogy object
     for i=1,#t2 do
         t1[#t1+1] = {x=t2[i].x, y=t2[i].y, w=t2[i].w, h=t2[i].h, sprite=t2[i].sprite}
@@ -237,4 +241,67 @@ function pd_rotate(x,y,rot,mx,my,w,flip,scale)
 
 function dist(x1,y1,x2,y2)
 	return sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1))
+end
+
+function clear_table(t)
+	for k in pairs (t) do
+		t [k] = nil
+	end
+end
+
+
+function sstar_init()
+    sp,dim,l,msp=.02,500,6,3
+    spsq=msp*msp
+    cam={x=rnd(dim),y=rnd(dim),vx=0,vy=0}
+    stars={}
+    for i=0,l do
+        stars[i]={}
+    end
+    for i=1,20 do
+        for j=0,l do
+            add(stars[j],{x=rnd(dim),y=rnd(dim),c=rnd(10)+6})
+        end
+    end
+end
+
+function sstar_update()
+    local vx,vy=cam.vx,cam.vy
+    cam.x+=vx
+    cam.y+=vy
+    if(btn(⬅️))vx+=sp
+    if(btn(➡️))vx-=sp
+    if(btn(⬆️))vy+=sp
+    if(btn(⬇️))vy-=sp
+
+    local vsq=vx*vx+vy*vy
+    -- normalise vel
+    if vsq>spsq then
+        local vmul=msp/sqrt(vsq)
+        vx*=vmul
+        vy*=vmul
+    end
+
+    cam.vx,cam.vy=vx,vy
+end
+
+function sstar_draw()
+    cls()
+    --for i=0,20 do rectfill(rnd(136)-4,rnd(136)-4,2,2,0)end
+    --line(63,63,63+cam.vx,63+cam.vy,8)
+    
+    for j=0,l do
+        --camera(cam.x/j,cam.y/j)
+        for i=1,#stars[j] do
+            s=stars[j][i]
+            pset((s.x+cam.x)\j%128,(s.y+cam.y)\j%128,s.c)
+        end
+    end
+
+    bear.x = 63 + cam.vx
+    bear.y = 63 + cam.vy
+
+	print(bear.x)
+	print(bear.y)
+    draw_bear()
 end

@@ -15,13 +15,16 @@ function addpart(x,y,dx,dy,g,maxage,col,old_col,_parts)
     add(_parts,p)
 end
 
-function spawn_trail(x,y,sx,sy,col,oldcol,intensity,_parts)
+function spawn_trail(x,y,sx,sy,col,oldcol,intensity,_parts,min_age,max_age)
+    local _max_age = max_age or 10
+    local _min_age = min_age or 5
+
     for i=1,intensity,1 do
         local ang = rnd()
         local ox = sin(ang)*sx
         local oy = cos(ang)*sy
         
-        addpart(x+ox,y+oy,0,0,0,5+rnd(5),col,oldcol,_parts)
+        addpart(x+ox,y+oy,0,0,0,get_rand_f(_min_age,_max_age),col,oldcol,_parts)
     end
 end
 
