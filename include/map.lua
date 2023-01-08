@@ -28,7 +28,7 @@ function solid(x,y)
 end
 
 function solid_on_coord(x,y)
-    for tree in all(forest_level.trees) do
+    for tree in all(trees) do
         tree_solid = {x=tree.x, y=tree.y+3*tree.h/4, w=tree.w, h=tree.h/4}
         --pset(tree_solid.x,tree_solid.y,8)
         --pset(tree_solid.x+tree_solid.w,tree_solid.y+tree_solid.h,8)
@@ -38,8 +38,8 @@ function solid_on_coord(x,y)
         end
     end
 
-    cave_solid1 = {x=forest_level.cave.x,y=forest_level.cave.y+5, w=forest_level.cave.w*4/5, h=5}
-    cave_solid2 = {x=forest_level.cave.x,y=forest_level.cave.y+forest_level.cave.h-3, w=forest_level.cave.w*4/5, h=3}
+    cave_solid1 = {x=cave.x,y=cave.y+5, w=cave.w*4/5, h=5}
+    cave_solid2 = {x=cave.x,y=cave.y+cave.h-3, w=cave.w*4/5, h=3}
     --draw_hitbox(cave_solid1)
     --draw_hitbox(cave_solid2)
     if bear_collide_with_obj(cave_solid1) then
@@ -49,14 +49,14 @@ function solid_on_coord(x,y)
         return true
     end
 
-    for stone in all(forest_level.stones) do
+    for stone in all(stones) do
         --draw_hitbox(stone)
         if bear_collide_with_obj(stone) then
             return true
         end
     end
 
-    for w in all(forest_level.water) do
+    for w in all(water) do
         --draw_hitbox(stone)
         if bear_collide_with_obj(w) then
             return true

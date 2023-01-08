@@ -1,7 +1,7 @@
 function init_bear()
     bear = {
-        x = forest_level.cave.x-10,
-        y = forest_level.cave.y+12,
+        x = cave.x-10,
+        y = cave.y+12,
         dx = 0,
         dy = 0,
         w = 15,
@@ -9,7 +9,7 @@ function init_bear()
         real_w = 15,
         real_h = 15,
         spr = 0,
-        speed = 1.6,
+        speed = 0.6,
         num_eaten = 0,
         anim = init_animation(0, 16, 10),
         level = 0,
@@ -115,7 +115,7 @@ function update_controls_bear()
         bear.dy+=bear.speed
     end
     if btnp(4) then
-        bear_collide_with_objs(forest_level.foods, bear_collide_with_food)
+        bear_collide_with_objs(foods, bear_collide_with_food)
     end
 
 end

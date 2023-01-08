@@ -75,7 +75,7 @@ function spawn_snow(intensitiy)
     
     for i=1,intensitiy*m,1 do
         if (m==10) then 
-            mage = get_rand(20,60)
+            mage = get_rand(0,100)
         end
         x = flr(rnd(128+ox))
         y = 0 + rnd(oy)
