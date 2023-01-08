@@ -1,7 +1,7 @@
 function init_terrain()
-    terrain = get_all_coords_for_spriten(14)
+    local terrain = get_all_coords_for_spriten(14)
 
-    summer_options = {138, 139, 154, 155, 14, 14, 14, 14}
+    summer_options = {14}
     summer_options_end = {170, 171, 186, 187}
     fall_options = {140, 141, 156, 157}
     fall_options_end = {172, 173, 188, 189}
@@ -11,11 +11,13 @@ function init_terrain()
     for t in all(terrain) do
         t.sprite = summer_options[ get_rand(1, #summer_options + 1 ) ]
     end
+
+    return terrain
 end
 
 function draw_terrain()
-    --print(count(terrain), cam_x, cam_y)
-    for t in all(terrain) do
+    print(count(terrain), cam_x, cam_y)
+    for t in all(forest_level.terrain) do
         spr(t.sprite,t.x,t.y,1,1)
     end
 end

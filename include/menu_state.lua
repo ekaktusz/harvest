@@ -38,4 +38,5 @@ function draw_menu()
     palt(14, true) -- pink color as transparency is true
     palt(0, false) -- black color as transparency is false
     pd_rotate(test_x, 100+sin(0.05*test_x)*14, test_a/360, 123, 28, 5, false, 1)
+    print(stat(1))
 end
