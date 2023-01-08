@@ -55,12 +55,12 @@ function solid_on_coord(x,y)
         return true
     end
 
-    for stone in all(stones) do
-        --draw_hitbox(stone)
-        if bear_collide_with_obj(stone) then
-            return true
-        end
-    end
+    --for stone in all(stones) do
+    --    --draw_hitbox(stone)
+    --    if bear_collide_with_obj(stone) then
+    --        return true
+    --    end
+    --end
 
     for w in all(water) do
         --draw_hitbox(stone)

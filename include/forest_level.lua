@@ -14,7 +14,7 @@ function init_forest_level()
     snowing = false
     tb_1 = tb_init({"asdasdasdasdasda"})
 
-    map_size_x = 255
+    map_size_x = 800
     map_size_y = 255
     
     current_level = "forest"
@@ -23,7 +23,8 @@ end
 function update_forest_level()
     update_bear()
     update_parts(bear_parts)
-    
+    update_animation(water_anim)
+    update_foods()
     tb_update(tb_1)
     --r,c=flr(bear.y/8),flr(bear.x/8)
     
@@ -47,6 +48,7 @@ function draw_forest_level()
     cls(0)
     camera_follow_bear()
     map(0,0,0,0,128,32)
+    rectfill(0,0,map_size_x,60,1) --sky
     draw_terrain()
     draw_water()
     draw_foods()
