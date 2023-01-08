@@ -28,15 +28,15 @@ function solid(x,y)
 end
 
 function solid_on_coord(x,y)
-    for tree in all(trees) do
-        tree_solid = {x=tree.x, y=tree.y+3*tree.h/4, w=tree.w, h=tree.h/4}
-        --pset(tree_solid.x,tree_solid.y,8)
-        --pset(tree_solid.x+tree_solid.w,tree_solid.y+tree_solid.h,8)
-        --draw_hitbox(tree_solid)
-        if bear_collide_with_obj(tree_solid) then
-            return true
-        end
-    end
+    --for tree in all(trees) do
+    --    tree_solid = {x=tree.x, y=tree.y+3*tree.h/4, w=tree.w, h=tree.h/4}
+    --    --pset(tree_solid.x,tree_solid.y,8)
+    --    --pset(tree_solid.x+tree_solid.w,tree_solid.y+tree_solid.h,8)
+    --    --draw_hitbox(tree_solid)
+    --    if bear_collide_with_obj(tree_solid) then
+    --        return true
+    --    end
+    --end
 
     cave_solid1 = {x=cave.x,y=cave.y+5, w=cave.w*4/5, h=5}
     cave_solid2 = {x=cave.x,y=cave.y+cave.h-3, w=cave.w*4/5, h=3}
