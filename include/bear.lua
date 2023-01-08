@@ -136,6 +136,7 @@ function update_controls_bear()
         end
         if btnp(4) then
             bear_collide_with_objs(foods, bear_collide_with_food)
+            bear_collide_with_objs(fishes, bear_collide_with_fish)
         end
     else
         if btn(⬅️) then 

@@ -9,6 +9,7 @@ function init_forest_level()
     init_sparks()
     init_mountains()
     init_stones()
+    init_fishes()
     init_water()
     init_hitboxes()
     snowing = false
@@ -32,6 +33,7 @@ function update_forest_level()
     update_parts(bear_parts)
     update_animation(water_anim)
     update_foods()
+    update_fishes()
     tb_update(tb_1)
     --r,c=flr(bear.y/8),flr(bear.x/8)
 
@@ -74,6 +76,7 @@ function draw_forest_level()
     draw_mountains()
     draw_front_trees()
     draw_stones()
+    draw_fishes()
     
     if(bear.level >= 1) then
         --draw_parts(snow_parts)

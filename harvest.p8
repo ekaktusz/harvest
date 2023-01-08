@@ -24,6 +24,7 @@ __lua__
 #include include/constellation.lua
 #include include/hitbox.lua
 #include include/helps.lua
+#include include/fish.lua
 __gfx__
 ee00eeeeeeee00eeeeeeeeeeeeeeeeeeeeeee444444eeeeeeeeee444444eeeeeeeeee444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 e0440e0000e0440eee00eeeeeeee00ee707e44fffff44eeeeeee44fffff44eeeeeee44fffff44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee

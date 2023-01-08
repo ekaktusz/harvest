@@ -8,8 +8,8 @@ function tb_init(string, _ox,_oy, _w, _h) -- this function starts and defines a 
         char=0, -- current character to be drawn on the text box.
         x=0, -- x coordinate
         y=0, -- y coordginate (106 default)
-        ox =_ox,
-        oy =_oy,
+        ox =_ox or 0,
+        oy =_oy or 0,
         w=_w or 127, -- text box width
         h=_h or 21, -- text box height
         col1=0, -- background color
@@ -50,7 +50,7 @@ function tb_update(tb)  -- this function handles the text box on every frame upd
     cam_y = mid(0,cam_y,128) 
 
     tb.x = cam_x + tb.ox -- x coordinate
-    tb.y = cam_y +tb.oy-- y coordginate (106 default)
+    tb.y = cam_y + tb.oy-- y coordginate (106 default)
 end
 
 function tb_draw(tb) -- this function draws the text box.
