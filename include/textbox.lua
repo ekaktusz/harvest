@@ -1,13 +1,15 @@
 --- textbox: https://www.lexaloffle.com/bbs/?tid=38668
-function tb_init(string, _x,_y, _w, _h) -- this function starts and defines a text box.
+function tb_init(string, _ox,_oy, _w, _h) -- this function starts and defines a text box.
     local tb={ -- table containing all properties of a text box. i like to work with tables, but you could use global variables if you preffer.
         str=string, -- the strings. remember: this is the table of strings you passed to this function when you called on _update()
         --voice=voice, -- the voice. again, this was passed to this function when you called it on _update()
         i=1, -- index used to tell what string from tb.str to read.
         cur=0, -- buffer used to progressively show characters on the text box.
         char=0, -- current character to be drawn on the text box.
-        x=_x or 0, -- x coordinate
-        y=_y or 0, -- y coordginate (106 default)
+        x=0, -- x coordinate
+        y=0, -- y coordginate (106 default)
+        ox =_ox,
+        oy =_oy,
         w=_w or 127, -- text box width
         h=_h or 21, -- text box height
         col1=0, -- background color
@@ -47,8 +49,8 @@ function tb_update(tb)  -- this function handles the text box on every frame upd
     cam_x = mid(0,cam_x,896) 
     cam_y = mid(0,cam_y,128) 
 
-    tb.x = cam_x -- x coordinate
-    tb.y = cam_y +5 -- y coordginate (106 default)
+    tb.x = cam_x + tb.ox -- x coordinate
+    tb.y = cam_y +tb.oy-- y coordginate (106 default)
 end
 
 function tb_draw(tb) -- this function draws the text box.

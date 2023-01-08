@@ -12,7 +12,7 @@ function init_forest_level()
     init_water()
     init_hitboxes()
     snowing = false
-    tb_1 = tb_init({"There once was a bear who loved to eat,Her appetite was hard to beat."}, 0, 0, 127 , 29)
+    tb_1 = tb_init({"There once was a bear who loved to eat,Her appetite was hard to beat."}, 0, 5, 127 , 29)
 
     map_size_x = 800
     map_size_y = 255
@@ -51,7 +51,7 @@ function update_forest_level()
     end
 
     if btnp(5) then
-        switch_season()
+        --switch_season()
     end
 
     doshake()
