@@ -12,6 +12,9 @@ function init_forest_level()
     init_water()
     snowing = false
     tb_1 = tb_init({"asdasdasdasdasda"})
+
+    map_size_x = 255
+    map_size_y = 255
     
     current_level = "forest"
 end

@@ -1,6 +1,6 @@
 function init_bear()
     bear = {
-        x = cave.x-10,
+        x = cave.x,
         y = cave.y+12,
         dx = 0,
         dy = 0,
@@ -153,16 +153,18 @@ end
 function camera_follow_bear()
     cam_x = bear.x - 64 + flr(bear.real_w / 2)
     cam_y = bear.y - 64 + flr(bear.real_h / 2)
-    cam_x = mid(0,cam_x,896) 
-    cam_y = mid(0,cam_y,128) 
+    cam_x = mid(0,cam_x,map_size_x) 
+    cam_y = mid(0,cam_y,map_size_y) 
     camera(cam_x, cam_y)
 end
 
 function can_move(x, y, w, h)
-    pset(x,y,8)
-    pset(x+w,y,8)
-    pset(x,y+h,8)
-    pset(x+w,y+h,8)
+    --pset(x,y,8)
+    --pset(x+w,y,8)
+    --pset(x,y+h,8)
+    --pset(x+w,y+h,8)
+
+    if (x < 0 or x > map_size_x or y < 0 or y > map_size_y) return false
 
     if (solid(x,y) or solid_on_coord(x,y)) return false
     if (solid(x+w,y) or solid_on_coord(x+w,y)) return false
