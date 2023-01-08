@@ -154,7 +154,7 @@ function draw_explode(color)
 end
 
 function snow2_init()
-    sp,dim,l,msp=.05,500,300,1.5
+    sp,dim,l,msp=.05,map_size_x,300,1.5
 	l2=0
     spsq=msp*msp
     cam={x=rnd(dim),y=rnd(dim),vx=0,vy=0}
@@ -178,7 +178,6 @@ function snow2_update()
 end
 
 function snow2_draw()
-    
     for j=0,l do
         --camera(cam.x/j,cam.y/j)
         for i=1,#snow2[j] do

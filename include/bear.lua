@@ -103,6 +103,7 @@ function update_bear()
         bear.freezed = true
         snowing = true
         snow2_init()
+        tb_1 = tb_init({"hellooo"})
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
     end
 

@@ -12,24 +12,29 @@ function init_forest_level()
     init_water()
     init_hitboxes()
     snowing = false
-    tb_1 = tb_init({"asdasdasdasdasda"})
+    tb_1 = tb_init({"There once was a bear who loved to eat,Her appetite was hard to beat."}, 0, 0, 127 , 29)
 
     map_size_x = 800
     map_size_y = 255
 
     shake = 0
-    
+
+    season_color = 3
+    current_season = "summer"
     current_level = "forest"
+    
+    time = 0
 end
 
 function update_forest_level()
+    time+=1
     update_bear()
     update_parts(bear_parts)
     update_animation(water_anim)
     update_foods()
     tb_update(tb_1)
     --r,c=flr(bear.y/8),flr(bear.x/8)
-    
+
     --camera(bear.x-c*8,bear.y-r*8)
 
     if snowing then
@@ -45,6 +50,10 @@ function update_forest_level()
         switch_to_space_level()
     end
 
+    if btnp(5) then
+        switch_season()
+    end
+
     doshake()
 end
 
@@ -52,6 +61,7 @@ function draw_forest_level()
     cls(0)
     camera_follow_bear()
     map(0,0,0,0,128,32)
+    rectfill(0,60,map_size_x,map_size_y,season_color) --ground
     rectfill(0,0,map_size_x,60,1) --sky
     draw_terrain()
     draw_water()
@@ -70,12 +80,31 @@ function draw_forest_level()
         snow2_draw()
     end
 
-    
-
     draw_explode()
     tb_draw(tb_1)
 
     pset(cam_x+64,cam_y+64,8)
 
-    draw_hitboxes()
+    --draw_hitboxes()
+
+    print(stat(1),cam_x,cam_y)
+end
+
+function switch_season()
+    if current_season == "summer" then
+
+    end
+    season_color=9
+    for t in all(terrain) do
+        t.season_tile_num = get_rand(1, 5)
+        t.sprite = fall_options[t.season_tile_num]
+    end
+    for t in all(trees) do 
+        if t.sprite == 132 then
+            local _tmp = rnd(1)
+            if _tmp < 0.5 then
+                t.sprite = 136
+            end
+        end
+    end
 end

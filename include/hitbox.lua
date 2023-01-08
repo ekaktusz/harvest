@@ -26,7 +26,6 @@ function add_hitbox(_x,_y,_w,_h)
 end
 
 function draw_hitboxes()
-    print(count(hitboxes), cam_x, cam_y)
     for h in all(hitboxes) do
         draw_hitbox(h)
     end

@@ -3,15 +3,17 @@ function init_terrain()
     road = get_all_coords_for_spriten(170)
 
     summer_options = {138, 139, 154, 155, 14, 14, 14, 14}
-    summer_options_end = {170, 171, 186, 187}
+    --summer_options_end = {170, 171, 186, 187}
     fall_options = {140, 141, 156, 157}
     fall_options_end = {172, 173, 188, 189}
     winter_options = {174, 175, 190, 191}
     winter_options_end = {142, 143, 158, 159}
     road_options = {170,171,186,187}
 
+
     for t in all(terrain) do
-        t.sprite = summer_options[ get_rand(1, #summer_options + 1 ) ]
+        t.season_tile_num = get_rand(1, 5)
+        t.sprite = summer_options[t.season_tile_num]
     end
 
     for r in all(road) do

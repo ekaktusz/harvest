@@ -11,13 +11,11 @@ function get_all_coords_for_spriten(spriten,w,h)
                 local _behind=false
 
                 if mget(i+1,j) == 46 then
-                    log("hehhh")
                     _behind=true
                 end
 
                 obj = {x=i*8,y=j*8,w=_w*8,h=_h*8,sprite=spriten,behind=_behind}
 
-                if (obj.behind) log(obj.behind)
                 add(t, obj)
                 mset(i,j,14)
             end

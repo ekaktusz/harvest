@@ -30,7 +30,6 @@ function draw_behind_trees()
     --print(count(trees))
     for tree in all(trees) do
         if tree.behind then
-            log("hehhh")
             spr(tree.sprite,tree.x,tree.y,2,4)
         end
     end
