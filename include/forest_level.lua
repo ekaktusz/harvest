@@ -29,8 +29,9 @@ function update_forest_level()
     --camera(bear.x-c*8,bear.y-r*8)
 
     if snowing then
-        spawn_snow(1)
-        update_snow_parts()
+        snow2_update()
+        --spawn_snow(1)
+        --update_snow_parts()
     end
 
     update_explode()
@@ -57,7 +58,8 @@ function draw_forest_level()
     draw_stones()
     
     if(bear.level >= 1) then
-        draw_parts(snow_parts)
+        --draw_parts(snow_parts)
+        snow2_draw()
     end
 
     

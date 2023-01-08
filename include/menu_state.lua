@@ -1,6 +1,6 @@
 local f = 0
 local test_a = 0
-local test_x = -20
+local test_x = 0
 
 function init_menu()
     _update60=update_menu
@@ -25,7 +25,12 @@ function update_menu()
     spawn_snow(1)
     update_snow_parts()
 
-    test_x += 0.1
+    test_x += .1
+
+    if test_x > 145 then
+        test_x = -20
+    end
+    
 end
 
 function draw_menu()
@@ -37,4 +42,5 @@ function draw_menu()
     palt(14, true) -- pink color as transparency is true
     palt(0, false) -- black color as transparency is false
     pd_rotate(test_x, 100+sin(0.05*test_x)*14, test_a/360, 123, 28, 5, false, 1)
+    --print(test_x)
 end

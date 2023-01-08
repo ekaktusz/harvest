@@ -101,6 +101,7 @@ function update_bear()
         bear.anim.time = 15
         bear.freezed = true
         snowing = true
+        snow2_init()
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
     end
 
