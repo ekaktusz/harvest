@@ -15,6 +15,9 @@ function init_space_level()
     space_animation_timer = 0
     space_animation_time = 95
     space_animation_finished = false
+
+    puki_timer = 0
+    shown_last_line = false
     
     sstar_init()
 
@@ -114,6 +117,10 @@ function update_space_level()
         space_animation_timer+=1
     end
 
+    if finished then
+        puki_timer+=1
+    end
+
     --update_bear()
     --update_parts(bear_parts)
     
@@ -126,7 +133,6 @@ function update_space_level()
     update_explode(0.1)
 
     if bear.num_eaten >= 15 and space.anim_time >0  then
-        tb_1 = tb_init(helps.finish_tb)
         finished = true
         explode(63,63,bear.w,500,300)
         shake+=0.02
@@ -135,9 +141,17 @@ function update_space_level()
         space.anim_time -= 1
     end
 
+    if puki_timer > 100 and not shown_last_line then
+        tb_1 = tb_init(helps.finish_tb)
+        shown_last_line = true
+    end
+
     tb_update(tb_1)
 
-    if finished and not tb_1.reading and btnp(5) and shake == 0 then
+    if finished and not tb_1.reading and btnp(5) and shake == 0 and shown_last_line then
+        clear_snow()
+        clear_table(planets)
+        clear_table(space)
         init_menu()
     end
 end

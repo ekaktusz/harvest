@@ -183,7 +183,7 @@ function update_bear()
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
         tb_1 = tb_init(helps.jollakot_tb)
         sfx(35)
-        bear.speed = 1.1
+        bear.speed = 0.8
     end
 
     if bear.level == 1 and bear.num_eaten > 50 then

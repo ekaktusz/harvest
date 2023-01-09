@@ -1,6 +1,7 @@
 function init_forest_level()
     palt(14, true) -- pink color as transparency is true
     palt(0, false) -- black color as transparency is false
+    reload(0x1000, 0x1000, 0x2000)
     init_terrain()
     init_cave()
     init_bear()
@@ -113,16 +114,23 @@ function draw_forest_level()
     draw_cave_bot()
     draw_behind_trees()
     draw_stones()
-    draw_bear()
+    if bear.level < 2 then
+        draw_bear()
+    end
     draw_cave_top()
     draw_mountains()
     draw_front_trees()
     draw_fishes()
+
+    if bear.level == 2 then
+        draw_bear()
+    end
     
     if(bear.level >= 1) then
         --draw_parts(snow_parts)
         snow2_draw()
     end
+
 
     draw_explode()
     tb_draw(tb_1)
@@ -147,9 +155,9 @@ function draw_forest_level()
 end
 
 function switch_season()
-    --if current_season == "summer" then
-    --    
-    --end
+    if current_season == "summer" then
+        
+    end
     season_color=9
     for t in all(terrain) do
         t.season_tile_num = get_rand(1, 5)
