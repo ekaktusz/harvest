@@ -92,6 +92,7 @@ function draw_forest_level()
     --draw_hitboxes()
 
     --(1),cam_x,cam_y)
+    print(bear.moving,cam_x,cam_y)
 end
 
 function switch_season()

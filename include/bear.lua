@@ -11,22 +11,38 @@ function init_bear()
         spr = 0,
         speed = 0.6,
         num_eaten = 0,
+        scale = 0,
         anim = init_animation(0, 16, 10),
+        eating_anim = init_animation(0,16,10),
         level = 0,
         angle = 0,
         freezed = false,
         freeze_time = 20,
         freeze_timer = 0,
-        rot = 0
+        eat_time = 40,
+        eat_timer = 0,
+        rot = 0,
+        moving = false,
+        eating = false
     }
 end
 
 function draw_bear()
-    --spr(bear.spr, bear.x, bear.y, 2, 2, bear.last_dir==0, false)
+    --spr(bear.spr, bear.x, bear.y, 2, 2, bear.last_dir==0, false
+
     if bear.level == 0 then
-        sspr(bear.anim.current_frame,16,16,16,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        --local _tmp = 0
+        if not bear.eating then
+            sspr(bear.anim.current_frame,16,16,16,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        else
+            sspr(bear.eating_anim.current_frame,0,16,16,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        end
     elseif bear.level == 1 then
-        sspr(bear.anim.current_frame,32,32,32,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        if bear.moving then
+            sspr(bear.anim.current_frame,32,32,32,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        else
+            sspr(96,32,32,32,bear.x,bear.y,bear.real_w,bear.real_h,bear.last_dir==0,false)
+        end
     elseif bear.level == 2 then
         --rspr(32,bear.x,bear.y,bear.angle,4,4)
         --draw_rotated_tile(bear.x, bear.y, 0/360,  121, 26, 4,false,1)
@@ -43,8 +59,8 @@ function update_real_size()
         bear.real_w=bear.w+bear.num_eaten
         bear.real_h=bear.h+bear.num_eaten
     elseif bear.level == 1 then
-        bear.real_w=bear.w+bear.num_eaten*2-5
-        bear.real_h=bear.h+bear.num_eaten*2-5
+        --bear.real_w=bear.w+bear.num_eaten*2-5
+        --bear.real_h=bear.h+bear.num_eaten*2-5
     end
 end
 
@@ -55,6 +71,8 @@ function freeze_bear(time)
 end
 
 function update_bear()
+
+    bear.moving = false
     bear_collide_with_objs(triggers, bear_collide_with_trigger)
 
     if tb_1.reading then
@@ -70,9 +88,21 @@ function update_bear()
         end
         return
     end
+
+    update_animation(bear.eating_anim)
+
+    if bear.eating then
+        bear.eat_timer += 1
+        if (bear.eat_timer > bear.eat_time) then
+            bear.eat_timer = 0
+            bear.eating = false
+        end
+        return
+    end
     
     update_real_size()
     update_controls_bear()
+    
 
     if bear.dx != 0 and bear.dy == 0 then
         bear.dx *= sqrt(2)
@@ -84,13 +114,14 @@ function update_bear()
 
     if current_level == "forest" then
         if (can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)) and bear.dx != 0 then
+            bear.moving = true
             bear.x+=bear.dx
             spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h, 2, 2, 7, 7, 1, bear_parts, 30, 50)
             update_animation(bear.anim)
         end
         if (can_move(bear.x,bear.y+bear.dy,bear.real_w,bear.real_h)) and bear.dy != 0 then
+            bear.moving = true
             bear.y+=bear.dy
-            
             spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h/2, 2, 2, 7, 7, 1, bear_parts)
             update_animation(bear.anim)
         end
