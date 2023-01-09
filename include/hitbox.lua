@@ -6,7 +6,7 @@ function init_hitboxes()
     add_hitbox(270,0,400,90)
     add_hitbox(170,0,100,75)
     add_hitbox(0,170,50,150)
-    add_hitbox(150,240,480,15)
+    add_hitbox(150,240,480,15) --water
     add_hitbox(50,220,150,100)
     add_hitbox(285,135,210,60)
     add_hitbox(570,120,30,80)
@@ -29,4 +29,12 @@ function draw_hitboxes()
     for h in all(hitboxes) do
         draw_hitbox(h)
     end
+end
+
+function remove_hitbox(hitbox)
+    for h in all(hitboxes) do
+        if(h.x == hitbox.x and h.y == hitbox.y and h.w ==hitbox.w and h.h == hitbox.h) then
+            del(hitboxes, h)
+        end
+    end 
 end

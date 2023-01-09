@@ -9,7 +9,7 @@ function init_bear()
         real_w = 15,
         real_h = 15,
         spr = 0,
-        speed = 0.6,
+        speed = 1.6,
         num_eaten = 0,
         scale = 0,
         anim = init_animation(0, 16, 10),
@@ -23,7 +23,8 @@ function init_bear()
         eat_timer = 0,
         rot = 0,
         moving = false,
-        eating = false
+        eating = false,
+        honey_eaten = false
     }
 end
 
@@ -56,8 +57,20 @@ end
 
 function update_real_size()
     if bear.level == 0 then
-        bear.real_w=bear.w+bear.num_eaten
-        bear.real_h=bear.h+bear.num_eaten
+        if bear.num_eaten > 5 and bear.real_w == bear.w then
+            bear.real_w=bear.w+1
+            bear.real_h=bear.h+1
+            tb_1 = tb_init(helps.firstgrow_tb)
+        end
+        if bear.num_eaten > 8 and bear.real_w == bear.w+1 then
+            bear.real_w+=1
+            bear.real_h+=1
+            tb_1 = tb_init(helps.honey_tb)
+        end
+        if bear.honey_eaten and bear.real_w == bear.w+2 then
+            bear.real_w += 1
+            bear.real_h+=1
+        end
     elseif bear.level == 1 then
         --bear.real_w=bear.w+bear.num_eaten*2-5
         --bear.real_h=bear.h+bear.num_eaten*2-5
@@ -133,7 +146,7 @@ function update_bear()
         end
     end
 
-    if bear.num_eaten > 3 and bear.level == 0 then
+    if count(fishes) == 0 and bear.level == 0 then
         bear.anim.sprt1 = 32
         bear.anim.sprt2 = 64
         bear.anim.current_frame = 32
@@ -147,17 +160,18 @@ function update_bear()
         freeze_bear(10)
         snowing = true
         snow2_init()
-        tb_1 = tb_init(helps.firstgrow_tb)
+        remove_hitbox({x=150,y=240,w=480,h=15})
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
+        tb_1 = tb_init(helps.jollakot_tb)
     end
 
-    if bear.num_eaten > 3 and bear.level == 1 then
-        bear.num_eaten = 0
-        bear.anim.time = 15
-        freeze_bear(10)
-        explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,100,100)
-        bear.level += 1
-    end
+    --if bear.num_eaten > 3 and bear.level == 1 then
+    --    bear.num_eaten = 0
+    --    bear.anim.time = 15
+    --    freeze_bear(10)
+    --    explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,100,100)
+    --    bear.level += 1
+    --end
 
     bear.dx,bear.dy=0,0
 end
@@ -182,6 +196,9 @@ function update_controls_bear()
             bear_collide_with_objs(foods, bear_collide_with_food)
             bear_collide_with_objs(fishes, bear_collide_with_fish)
         end
+        --if btnp(5) then
+        --    remove_hitbox({x=150,y=240,w=480,h=15})
+        --end
     else
         if btn(⬅️) then 
             bear.rot-=1

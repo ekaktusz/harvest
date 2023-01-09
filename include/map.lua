@@ -70,16 +70,19 @@ function solid_on_coord(x,y)
     --    end
     --end
 
-    for w in all(water) do
-        --draw_hitbox(stone)
-        if bear_collide_with_obj(w) then
-            return true
-        end
-    end
+    --for w in all(water) do
+    --    --draw_hitbox(stone)
+    --    if bear_collide_with_obj(w) then
+    --        return true
+    --    end
+    --end
 
     return false
 end
 
 function draw_hitbox(obj)
     rect(obj.x, obj.y, obj.x+obj.w, obj.y+obj.h)
+    
+    print(obj.x, obj.x, obj.y)
+    print(obj.y, obj.x, obj.y+10)
 end

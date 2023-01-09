@@ -30,6 +30,7 @@ function bear_collide_with_fish(fish)
     if fish_anim1.current_frame == 14 then
         return
     end
+    bear.eating = true
     bear.num_eaten += 1
     for i=1,#fishes,1 do
         if fishes[i] == fish then
