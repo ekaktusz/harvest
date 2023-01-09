@@ -236,7 +236,7 @@ function update_controls_bear()
         if btn(⬇️) then 
             bear.dy+=bear.speed
         end
-        if btnp(4) then
+        if btnp(5) then
             bear_collide_with_objs(foods, bear_collide_with_food)
             bear_collide_with_objs(fishes, bear_collide_with_fish)
             if bear.level == 1 and bear.seen_stone then
@@ -245,10 +245,10 @@ function update_controls_bear()
                 bear_collide_with_objs(stones, bear_collide_with_stone)
             end
         end
-        if btnp(5) then
-            --remove_hitbox({x=150,y=240,w=480,h=15})
-            --bear.level = 1
-        end
+        --if btnp(5) then
+        --    --remove_hitbox({x=150,y=240,w=480,h=15})
+        --    --bear.level = 1
+        --end
     else
         if btn(⬅️) then 
             bear.rot-=1
