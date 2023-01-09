@@ -18,7 +18,7 @@ function add_trigger(_x,_y,_w,_h,_text_box)
 end
 
 function bear_collide_with_trigger(t)
-    tb_1 = tb_init({t.textbox.text},t.textbox.x,t.textbox.y,t.textbox.w,t.textbox.h)
-    freeze_bear(80)
+    tb_1 = tb_init(t.textbox)
+    --freeze_bear(80)
     del(triggers, t)
 end

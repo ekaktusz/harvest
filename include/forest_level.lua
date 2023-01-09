@@ -14,7 +14,7 @@ function init_forest_level()
     init_hitboxes()
     init_triggers()
     snowing = false
-    tb_1 = tb_init({"There once was a bear who loved to eat,Her appetite was hard to beat."}, 0, 5, 127 , 29)
+    tb_1 = tb_init(helps.start_tb)
 
     map_size_x = 800
     map_size_y = 255

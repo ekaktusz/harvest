@@ -57,6 +57,11 @@ end
 function update_bear()
     bear_collide_with_objs(triggers, bear_collide_with_trigger)
 
+    if tb_1.reading then
+        bear.freezed = 0
+        bear.freeze_time = 5
+    end
+
     if bear.freezed then
         bear.freeze_timer += 1
         if (bear.freeze_timer > bear.freeze_time) then
@@ -111,7 +116,7 @@ function update_bear()
         freeze_bear(10)
         snowing = true
         snow2_init()
-        tb_1 = tb_init({"hellooo"})
+        tb_1 = tb_init(helps.firstgrow_tb)
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
     end
 
