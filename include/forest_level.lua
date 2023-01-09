@@ -39,6 +39,8 @@ function init_forest_level()
     switch_animation_time = 160
     switch_animation_started = false
 
+    switch_season()
+
     --tb_1.reading =false
 end
 
@@ -155,19 +157,28 @@ function draw_forest_level()
 end
 
 function switch_season()
-    if current_season == "summer" then
-        
-    end
-    season_color=9
-    for t in all(terrain) do
-        t.season_tile_num = get_rand(1, 5)
-        t.sprite = fall_options[t.season_tile_num]
-    end
+    --if current_season == "summer" then
+    --    
+    --end
+    --season_color=9
+    --for t in all(terrain) do
+    --    t.season_tile_num = get_rand(1, 5)
+    --    t.sprite = fall_options[t.season_tile_num]
+    --end
     for t in all(trees) do 
         if t.sprite == 132 then
             local _tmp = rnd(1)
-            if _tmp < 0.5 then
+            if _tmp < 0.3 then
                 t.sprite = 136
+            end
+            if _tmp < 0.1 then
+                t.sprite = 134
+            end
+        end
+        if t.sprite == 128 then
+            local _tmp = rnd(1)
+            if _tmp < 0.3 then
+                t.sprite = 130
             end
         end
     end

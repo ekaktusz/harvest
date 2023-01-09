@@ -155,7 +155,7 @@ function draw_explode(color)
 end
 
 function snow2_init()
-    sp,dim,l,msp=.05,map_size_x,300,1.5
+    sp,dim,l,msp=.05,map_size_x,600,1.5
 	l2=0
     spsq=msp*msp
     cam={x=rnd(dim),y=rnd(dim),vx=0,vy=0}
