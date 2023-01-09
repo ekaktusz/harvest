@@ -57,9 +57,17 @@ function solid_on_coord(x,y)
     --draw_hitbox(cave_solid1)
     --draw_hitbox(cave_solid2)
     if bear_collide_with_obj(cave_solid1) then
+        if (bear.level == 1) and not bear.seen_barlang then
+            tb_1 = tb_init(helps.barlang__tb)
+            bear.seen_barlang = true
+        end
         return true
     end
     if bear_collide_with_obj(cave_solid2) then
+        if (bear.level == 1) and not bear.seen_barlang then
+            tb_1 = tb_init(helps.barlang__tb)
+            bear.seen_barlang = true
+        end
         return true
     end
 

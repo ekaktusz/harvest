@@ -24,7 +24,9 @@ function init_bear()
         rot = 0,
         moving = false,
         eating = false,
-        honey_eaten = false
+        honey_eaten = false,
+        seen_barlang = false,
+        seen_stone = false
     }
 end
 
@@ -91,6 +93,11 @@ function update_bear()
     if tb_1.reading then
         bear.freezed = 0
         bear.freeze_time = 5
+    end
+
+    if not tb_1.reading and bear.seen_barlang and not bear.seen_stone then
+        tb_1 = tb_init(helps.stones_tb)
+        bear.seen_stone=true
     end
 
     if bear.freezed then

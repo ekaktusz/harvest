@@ -97,7 +97,7 @@ end
 
 function switch_season()
     if current_season == "summer" then
-
+        
     end
     season_color=9
     for t in all(terrain) do
