@@ -254,7 +254,7 @@ function can_move(x, y, w, h)
     --pset(x,y+h,8)
     --pset(x+w,y+h,8)
 
-    if (x < 0 or x > map_size_x or y < 0 or y > map_size_y) return false
+    if (x < 0 or x+w > map_size_x or y < 0 or y+h > map_size_y) return false
 
     if (solid(x,y) or solid_on_coord(x,y)) return false
     if (solid(x+w,y) or solid_on_coord(x+w,y)) return false
