@@ -37,3 +37,10 @@ function draw_behind_trees()
     --    spr(tree.sprite,tree.x,tree.y,2,4)
     --end
 end
+
+function bear_collide_with_tree(tree)
+    --bear.eating = true
+    --freeze_bear(10)
+    del(trees, tree)
+    bear.num_eaten += 1
+end

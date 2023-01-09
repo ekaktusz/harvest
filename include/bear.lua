@@ -97,6 +97,7 @@ function update_bear()
 
     if not tb_1.reading and bear.seen_barlang and not bear.seen_stone then
         tb_1 = tb_init(helps.stones_tb)
+        clear_table(hitboxes)
         bear.seen_stone=true
     end
 
@@ -202,6 +203,9 @@ function update_controls_bear()
         if btnp(4) then
             bear_collide_with_objs(foods, bear_collide_with_food)
             bear_collide_with_objs(fishes, bear_collide_with_fish)
+            if bear.level == 1 and bear.seen_stone then
+                bear_collide_with_objs(trees, bear_collide_with_tree)
+            end
         end
         --if btnp(5) then
         --    remove_hitbox({x=150,y=240,w=480,h=15})
