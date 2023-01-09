@@ -5,6 +5,7 @@ function tb_init(t) -- this function starts and defines a text box.
     local _oy = t.y
     local _w  = t.w
     local _h  = t.h
+    local _time = t.time
     local tb={ -- table containing all properties of a text box. i like to work with tables, but you could use global variables if you preffer.
         str=string, -- the strings. remember: this is the table of strings you passed to this function when you called on _update()
         --voice=voice, -- the voice. again, this was passed to this function when you called it on _update()
@@ -20,7 +21,7 @@ function tb_init(t) -- this function starts and defines a text box.
         col1=0, -- background color
         col2=7, -- border color
         col3=7, -- text color
-        time=400, -- until its dismissed automatically
+        time=_time, -- until its dismissed automatically
         reading=true -- sets reading to true when a text box has been called.
     }
     return tb
