@@ -84,7 +84,11 @@ function doshake()
 	-- you draw on the screen
 	-- afterwards will be shifted
 	-- by that many pixels
-	camera(shakex,shakey)
+	if current_level == "space" then
+		cam_x = 0
+		cam_y = 0
+	end
+	camera(cam_x+shakex,cam_y+shakey)
 
 	-- finally, fade out the shake
 	-- reset to 0 when very low
@@ -263,7 +267,7 @@ function sstar_init()
     sp,dim,l,msp=.05,500,6,1.5
 	l2=0
     spsq=msp*msp
-    cam={x=rnd(dim),y=rnd(dim),vx=0,vy=0}
+    cam={x=rnd(dim),y=rnd(dim),vx=-0.1,vy=-0.1}
     stars={}
 	planets={}
     for i=0,l do
@@ -286,11 +290,13 @@ function sstar_update()
     local vx,vy=cam.vx,cam.vy
     cam.x+=vx
     cam.y+=vy
-	
-	if(btn(⬅️))vx+=sp
-	if(btn(➡️))vx-=sp
-	if(btn(⬆️))vy+=sp
-	if(btn(⬇️))vy-=sp
+
+	if not finished then
+		if(btn(⬅️))vx+=sp
+		if(btn(➡️))vx-=sp
+		if(btn(⬆️))vy+=sp
+		if(btn(⬇️))vy-=sp
+	end
 
     local vsq=vx*vx+vy*vy
     -- normalise vel
@@ -300,20 +306,24 @@ function sstar_update()
         vy*=vmul
     end
 
-	for planet in all(space.planets) do
-		if planet.x > 0 and planet.y < 128 and planet.y > 0 and planet.y < 128 then
-			if (dist(bear.x,bear.y,planet.x,planet.y) < 16 + planet.r) then
-				del(space.planets,planet)
-				bear.num_eaten+=1
-				shake += 0.1
+	if not finished then
+		for planet in all(space.planets) do
+			if planet.x > 0 and planet.y < 128 and planet.y > 0 and planet.y < 128 then
+				if (dist(bear.x,bear.y,planet.x,planet.y) < 16 + planet.r) then
+					del(space.planets,planet)
+					sfx(34)
+					bear.num_eaten+=1
+					shake += 0.1
+				end
 			end
 		end
-	end
 
-	for planet in all(space.planets) do
-        planet.x+=vx 
-		planet.y+=vy
-    end
+		for planet in all(space.planets) do
+			planet.x+=vx 
+			planet.y+=vy
+		end
+
+	end
 
 	bear.x = 63 + cam.vx
     bear.y = 63 + cam.vy
@@ -349,7 +359,7 @@ function sstar_draw()
 
     --draw_bear()
 
-	print(count(space.planets))
+	--print(count(space.planets))
 end
 
 function contains(table, val)
@@ -360,3 +370,17 @@ function contains(table, val)
 	end
 	return false
 end
+
+function draw_anim(size,icx,icy)
+	cx=icx or 64
+	cy=icy or 64
+	for i=90,size,-1 do
+		circ(cx,cy,i,0)
+		circ(cx+1,cy,i,0)
+	end
+	
+	circ(cx,cy,size,7)
+	circ(cx+1,cy,size,7)
+end
+
+function wait(a) for i = 1,a do flip() end end

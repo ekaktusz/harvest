@@ -28,6 +28,9 @@ function init_bear()
         seen_barlang = false,
         seen_stone = false
     }
+    wait_time_switch = 60
+    wait_time_started= false
+    wait_time_timer = 0
 end
 
 function draw_bear()
@@ -63,15 +66,18 @@ function update_real_size()
             bear.real_w=bear.w+1
             bear.real_h=bear.h+1
             tb_1 = tb_init(helps.firstgrow_tb)
+            sfx(35)
         end
         if bear.num_eaten > 8 and bear.real_w == bear.w+1 then
             bear.real_w+=1
             bear.real_h+=1
             tb_1 = tb_init(helps.honey_tb)
+            sfx(35)
         end
         if bear.honey_eaten and bear.real_w == bear.w+2 then
             bear.real_w += 1
             bear.real_h+=1
+            sfx(35)
         end
     elseif bear.level == 1 then
         --bear.real_w=bear.w+bear.num_eaten*2-5
@@ -135,6 +141,11 @@ function update_bear()
 
     if current_level == "forest" then
         if (can_move(bear.x+bear.dx,bear.y,bear.real_w,bear.real_h)) and bear.dx != 0 then
+            --if level == 0 then
+            --    sfx(32)
+            --else
+            --    sfx(31)
+            --end
             bear.moving = true
             bear.x+=bear.dx
             spawn_trail(bear.x + bear.real_w/2, bear.y + bear.real_h, 2, 2, 7, 7, 1, bear_parts, 30, 50)
@@ -171,6 +182,27 @@ function update_bear()
         remove_hitbox({x=150,y=240,w=480,h=15})
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
         tb_1 = tb_init(helps.jollakot_tb)
+        sfx(35)
+    end
+
+    if bear.level == 1 and bear.num_eaten > 50 then
+        sfx(35)
+        bear.num_eaten = 0
+        bear.anim.time = 15
+        freeze_bear(10)
+        explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,100,100)
+        bear.level += 1
+        switch_animation_timer = 0
+        wait_time_started = true
+        tb_1 = tb_init(helps.pukk_tb)
+    end
+
+    if wait_time_switch < wait_time_timer then
+        switch_animation_started = true
+    end
+
+    if wait_time_started then
+        wait_time_timer += 1
     end
 
     --if bear.num_eaten > 3 and bear.level == 1 then
@@ -186,6 +218,9 @@ end
 
 function update_controls_bear()
     if current_level == "forest" then
+        if bear.level == 2 then
+            return
+        end
         if btn(⬅️) then 
             bear.dx-=bear.speed
             bear.last_dir = 0
@@ -209,9 +244,10 @@ function update_controls_bear()
                 bear_collide_with_objs(stones, bear_collide_with_stone)
             end
         end
-        --if btnp(5) then
-        --    remove_hitbox({x=150,y=240,w=480,h=15})
-        --end
+        if btnp(5) then
+            --remove_hitbox({x=150,y=240,w=480,h=15})
+            --bear.level = 1
+        end
     else
         if btn(⬅️) then 
             bear.rot-=1
@@ -229,11 +265,15 @@ function update_controls_bear()
 end
 
 function camera_follow_bear()
+    if bear.eating then
+        return
+    end
+
     cam_x = bear.x - 64 + flr(bear.real_w / 2)
     cam_y = bear.y - 64 + flr(bear.real_h / 2)
 
     if cam_x > (map_size_x - 128) then
-        print("hellooo")
+        --print("hellooo")
         cam_x = map_size_x - 128
     else
         cam_x = mid(0,cam_x,map_size_x) 

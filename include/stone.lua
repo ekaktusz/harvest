@@ -13,6 +13,9 @@ end
 function bear_collide_with_stone(stone)
     --bear.eating = true
     --freeze_bear(10)
+    bear.eating = true
+    --freeze_bear(10)
+    shake += 0.05
     del(stones, stone)
     bear.num_eaten += 1
 end

@@ -5,13 +5,18 @@ local test_x = 0
 function init_menu()
     _update60=update_menu
     _draw = draw_menu
+    anim_size = 95
+    x_pressed = false
+    music(32)
 end
 
 function update_menu()
 	f+=2.5
     if btnp(5) then
-        init_game()
-        clear_snow()
+        --init_game()
+        --clear_snow()
+        sfx(35)
+        x_pressed = true
     end
 
     if btn(1) then
@@ -31,6 +36,14 @@ function update_menu()
         test_x = -20
     end
     
+    if x_pressed then
+        anim_size -= 3
+    end
+
+    if anim_size < -1 then
+        init_game()
+        clear_snow()
+    end
 end
 
 function draw_menu()
@@ -43,4 +56,5 @@ function draw_menu()
     palt(0, false) -- black color as transparency is false
     pd_rotate(test_x, 100+sin(0.05*test_x)*14, test_a/360, 123, 28, 5, false, 1)
     --print(test_x)
+    draw_anim(anim_size)
 end

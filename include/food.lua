@@ -46,6 +46,7 @@ end
 function bear_collide_with_food(food)
     food_copy = {x=food.x, y=food.y, w=food.w, h=food.h, sprite=food.sprite}
     bear.eating = true
+    sfx(30)
     
     --freeze_bear(10)
     add(eaten_foods, food_copy)

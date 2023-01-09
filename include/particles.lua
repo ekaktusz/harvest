@@ -141,6 +141,7 @@ end
 function draw_explode(color)
     local _color = color or 7
     for i=1, #sparks do
+
 		if sparks[i].alive then
 			circfill(
                 sparks[i].x, --x pos

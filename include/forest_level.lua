@@ -13,10 +13,11 @@ function init_forest_level()
     init_water()
     init_hitboxes()
     init_triggers()
+
     snowing = false
     tb_1 = tb_init(helps.start_tb)
 
-    map_size_x = 800
+    map_size_x = 760
     map_size_y = 255
 
     shake = 0
@@ -26,9 +27,29 @@ function init_forest_level()
     current_level = "forest"
     
     time = 0
+
+    forest_level_loaded = false
+
+    puki_anim_time = 20
+
+    anim_size = -1
+
+    switch_animation_timer = 0
+    switch_animation_time = 160
+    switch_animation_started = false
+
+    tb_1.reading =false
 end
 
 function update_forest_level()
+    if anim_size > 95 then
+        forest_level_loaded = true
+    end
+
+    if anim_size < 95 and not forest_level_loaded then
+        anim_size += 3
+        return
+    end
     time+=1
     update_bear()
     update_parts(bear_parts)
@@ -48,13 +69,32 @@ function update_forest_level()
 
     update_explode()
 
-    if bear.level >=2 and bear.num_eaten >= 2 then
-        bear.num_eaten = 0
-        switch_to_space_level()
-    end
+    --if bear.level >=2 and bear.num_eaten >= 2 then
+    --    bear.num_eaten = 0
+    --    switch_to_space_level()
+    --end
 
     if btnp(5) then
         --switch_season()
+    end
+
+    --if bear.num_eaten >= 50 and puki_anim_time >0  then
+    --    explode(63,63,bear.w,500,300)
+    --    shake+=0.02
+    --    puki_anim_time -= 1
+    --end
+
+    --if btnp(5) then
+    --    switch_animation_timer = 0
+    --    switch_animation_started = true
+    --end
+
+    if switch_animation_started and switch_animation_timer < switch_animation_time then
+        switch_animation_timer+=1
+    end
+
+    if switch_animation_timer == switch_animation_time then
+        switch_to_space_level()
     end
 
     doshake()
@@ -87,12 +127,23 @@ function draw_forest_level()
     draw_explode()
     tb_draw(tb_1)
 
-    pset(cam_x+64,cam_y+64,8)
+    --pset(cam_x+64,cam_y+64,8)
 
     --draw_hitboxes()
 
     --(1),cam_x,cam_y)
-    print(bear.moving,cam_x,cam_y)
+    --print(bear.moving,cam_x,cam_y)
+
+
+    if anim_size < 95 and not forest_level_loaded then
+        draw_anim(anim_size,cam_x+64, cam_y+64)
+    end
+
+    if switch_animation_started then
+        draw_anim(switch_animation_time-switch_animation_timer,cam_x+64, cam_y+64)
+        --draw_bear()
+    end
+    
 end
 
 function switch_season()

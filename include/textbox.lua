@@ -50,13 +50,20 @@ function tb_update(tb)  -- this function handles the text box on every frame upd
         tb.reading=false
     end
 
-    cam_x = bear.x - 64 + flr(bear.real_w / 2)
-    cam_y = bear.y - 64 + flr(bear.real_h / 2)
-    cam_x = mid(0,cam_x,896) 
-    cam_y = mid(0,cam_y,128) 
+    if not bear.eating then
+        cam_x = bear.x - 64 + flr(bear.real_w / 2)
+        cam_y = bear.y - 64 + flr(bear.real_h / 2)
+        cam_x = mid(0,cam_x,896) 
+        cam_y = mid(0,cam_y,128) 
+    end
 
-    tb.x = cam_x + tb.ox -- x coordinate
-    tb.y = cam_y + tb.oy-- y coordginate (106 default)
+    if current_level == "forest" then
+        tb.x = cam_x + tb.ox -- x coordinate
+        tb.y = cam_y + tb.oy-- y coordginate (106 default)
+    else
+        tb.x = tb.ox
+        tb.y = tb.oy
+    end
 end
 
 function tb_draw(tb) -- this function draws the text box.

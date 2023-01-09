@@ -41,6 +41,10 @@ end
 function bear_collide_with_tree(tree)
     --bear.eating = true
     --freeze_bear(10)
+    shake += 0.05
+    sfx(30)
+    --explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
+    bear.eating = true
     del(trees, tree)
     bear.num_eaten += 1
 end
