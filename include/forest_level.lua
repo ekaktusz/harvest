@@ -91,7 +91,7 @@ function draw_forest_level()
 
     --draw_hitboxes()
 
-    print(stat(1),cam_x,cam_y)
+    --(1),cam_x,cam_y)
 end
 
 function switch_season()

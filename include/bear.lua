@@ -170,8 +170,26 @@ end
 function camera_follow_bear()
     cam_x = bear.x - 64 + flr(bear.real_w / 2)
     cam_y = bear.y - 64 + flr(bear.real_h / 2)
-    cam_x = mid(0,cam_x,map_size_x) 
-    cam_y = mid(0,cam_y,map_size_y) 
+
+    if cam_x > (map_size_x - 128) then
+        print("hellooo")
+        cam_x = map_size_x - 128
+    else
+        cam_x = mid(0,cam_x,map_size_x) 
+
+    end
+
+    --log("CAM")
+    --log(cam_y)
+    --log(map_size_y - 64 + flr(bear.real_h / 2))
+    if cam_y > (map_size_y - 128) then
+        log("aAA")
+        cam_y = map_size_y - 128
+    else
+        cam_y = mid(0,cam_y,map_size_y) 
+
+    end
+
     camera(cam_x, cam_y)
 end
 
