@@ -48,7 +48,15 @@ function update_real_size()
     end
 end
 
+function freeze_bear(time)
+    bear.freezed = true
+    bear.freeze_time = time
+    bear.freeze_timer = 0
+end
+
 function update_bear()
+    bear_collide_with_objs(triggers, bear_collide_with_trigger)
+
     if bear.freezed then
         bear.freeze_timer += 1
         if (bear.freeze_timer > bear.freeze_time) then
@@ -100,7 +108,7 @@ function update_bear()
         bear.level += 1
         bear.num_eaten = 0
         bear.anim.time = 15
-        bear.freezed = true
+        freeze_bear(10)
         snowing = true
         snow2_init()
         tb_1 = tb_init({"hellooo"})
@@ -110,7 +118,7 @@ function update_bear()
     if bear.num_eaten > 3 and bear.level == 1 then
         bear.num_eaten = 0
         bear.anim.time = 15
-        bear.freezed = true
+        freeze_bear(10)
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,100,100)
         bear.level += 1
     end

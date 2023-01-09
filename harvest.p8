@@ -25,6 +25,7 @@ __lua__
 #include include/hitbox.lua
 #include include/helps.lua
 #include include/fish.lua
+#include include/triggers.lua
 __gfx__
 ee00eeeeeeee00eeeeeeeeeeeeeeeeeeeeeee444444eeeeeeeeee444444eeeeeeeeee444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 e0440e0000e0440eee00eeeeeeee00ee707e44fffff44eeeeeee44fffff44eeeeeee44fffff44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
