@@ -12,5 +12,5 @@ helps = {
     space_tb = {text="semmi", x=2,y=98, w=122,h=26,time=500},
     finish_tb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000},
     berry_rb = {text="The berries lay in a place not near, So look around north, and have no fear.", x=2,y=98, w=122,h=26,time=1000, rb=true},
-    honey_rb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000, rb=true}
+    honey_rb = {text="Bear, take heed as you roam the land, The honey you seek are not where you had planned.", x=2,y=98, w=122,h=26,time=1000, rb=true}
 }

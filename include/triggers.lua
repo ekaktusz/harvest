@@ -3,8 +3,8 @@ function init_triggers()
     triggers = {}
     add_trigger(80,120,20,100,helps.letsgo_tb)
     add_trigger(190,100,20,100,helps.mallorn_tb)
-    add_trigger(180,190,70,25,helps.berry_rb,true) --roadblock
-    add_trigger(495,135,75,25,helps.honey_rb,true) --roadblock
+    add_trigger(180,190,70,15,helps.berry_rb,true) --roadblock
+    add_trigger(495,155,75,25,helps.honey_rb,true) --roadblock
 end
 
 function add_trigger(_x,_y,_w,_h,_text_box,roadblock)
