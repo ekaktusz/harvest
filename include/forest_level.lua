@@ -38,7 +38,7 @@ function init_forest_level()
     switch_animation_time = 160
     switch_animation_started = false
 
-    tb_1.reading =false
+    --tb_1.reading =false
 end
 
 function update_forest_level()
@@ -112,11 +112,11 @@ function draw_forest_level()
     draw_parts(bear_parts)
     draw_cave_bot()
     draw_behind_trees()
+    draw_stones()
     draw_bear()
     draw_cave_top()
     draw_mountains()
     draw_front_trees()
-    draw_stones()
     draw_fishes()
     
     if(bear.level >= 1) then
@@ -147,9 +147,9 @@ function draw_forest_level()
 end
 
 function switch_season()
-    if current_season == "summer" then
-        
-    end
+    --if current_season == "summer" then
+    --    
+    --end
     season_color=9
     for t in all(terrain) do
         t.season_tile_num = get_rand(1, 5)

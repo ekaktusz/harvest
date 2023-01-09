@@ -9,7 +9,7 @@ function init_bear()
         real_w = 15,
         real_h = 15,
         spr = 0,
-        speed = 1.6,
+        speed = 0.6,
         num_eaten = 0,
         scale = 0,
         anim = init_animation(0, 16, 10),
@@ -96,7 +96,7 @@ function update_bear()
     bear.moving = false
     bear_collide_with_objs(triggers, bear_collide_with_trigger)
 
-    if tb_1.reading then
+    if tb_1.reading and not tb_1.rb then
         bear.freezed = 0
         bear.freeze_time = 5
     end
@@ -183,6 +183,7 @@ function update_bear()
         explode(bear.x+bear.w/2,bear.y+bear.h/2,bear.w/2,40,100)
         tb_1 = tb_init(helps.jollakot_tb)
         sfx(35)
+        bear.speed = 1.1
     end
 
     if bear.level == 1 and bear.num_eaten > 50 then
@@ -197,7 +198,7 @@ function update_bear()
         tb_1 = tb_init(helps.pukk_tb)
     end
 
-    if wait_time_switch < wait_time_timer then
+    if wait_time_switch < wait_time_timer or (bear.level==2 and not tb_1.reading) then
         switch_animation_started = true
     end
 

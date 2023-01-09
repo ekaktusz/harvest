@@ -53,7 +53,9 @@ function bear_collide_with_food(food)
     if food.sprite == 4 then --honey
         bear.honey_eaten = true
         tb_1 = tb_init(helps.fish_tb)
+        delete_roadblocks()
     end
     del(foods, food)
     bear.num_eaten += 1
+    --switch_season()
 end

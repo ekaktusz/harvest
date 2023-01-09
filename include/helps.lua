@@ -10,5 +10,7 @@ helps = {
     stones_tb = {text="she gobbled up stones, \nstumps, and every leaf, \nshe ate the trees, mountains, \neverything in her reach.", x=2,y=98, w=122,h=26,time=500},
     pukk_tb = {text="oh the old mountain, \nshe ate it as a whole, \nso she looked up at the sky \nand saw her new goal.", x=2,y=98, w=122,h=26,time=500},
     space_tb = {text="semmi", x=2,y=98, w=122,h=26,time=500},
-    finish_tb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000}
+    finish_tb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000},
+    berry_rb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000, rb=true},
+    honey_rb = {text="the bear ate celestials, \none by one, \nuntil she became ursa maior, \nthe only one...", x=2,y=98, w=122,h=26,time=1000, rb=true}
 }

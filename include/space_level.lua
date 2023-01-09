@@ -96,7 +96,7 @@ function draw_space_level()
         bear.y = 63 + cam.vy
         draw_anim(space_animation_timer, 64, 64)
         --draw_bear()
-        print(space_animation_timer)
+        --print(space_animation_timer)
         --tb_1 = tb_init(helps.space_tb)
         --space_animation_finished = true
     end
