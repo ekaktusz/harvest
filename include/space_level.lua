@@ -31,14 +31,17 @@ function init_stars()
 end
 
 function init_planets()
+    --local planet_options = {40,41,56,57,47,62,63}
+    local planet_options = {{sx=64,sy=16},{sx=64,sy=24},{sx=72,sy=16},{sx=72,sy=24},{sx=120,sy=16},{sx=120,sy=24},{sx=112,sy=24}}
     local planets = {}
     for i=1,300,1 do
         planet = {
             x = get_rand(-1000,1000),
             y = get_rand(-1000,1000),
-            r = get_rand(2,5)
+            r = get_rand(4,8)
         }
-        planet.c = 1 + rnd(14)
+        --planet.c = 1 + rnd(14)
+        planet.sprt = planet_options[ get_rand(1, #planet_options + 1 ) ]
         add(planets, planet)
     end
     return planets
@@ -65,7 +68,8 @@ function draw_space_level()
 
     if not finished then
         for planet in all(space.planets) do
-            circfill(planet.x, planet.y, planet.r, planet.c)
+            --circfill(planet.x, planet.y, planet.r, planet.c)
+            sspr(planet.sprt.sx,planet.sprt.sy,8,8,planet.x-planet.r,planet.y-planet.r,planet.r*2,planet.r*2)
             --circfill(planet.x+1, planet.y+1, planet.r-2, planet.c+1)
         end
     end
