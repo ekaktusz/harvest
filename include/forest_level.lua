@@ -65,7 +65,7 @@ function draw_forest_level()
     camera_follow_bear()
     map(0,0,0,0,128,32)
     rectfill(0,60,map_size_x,map_size_y,season_color) --ground
-    rectfill(0,0,map_size_x,60,1) --sky
+    rectfill(0,0,map_size_x,60,12) --sky
     draw_terrain()
     draw_water()
     draw_foods()

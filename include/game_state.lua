@@ -2,6 +2,7 @@ function init_game()
     _update60 = update_game
     _draw = draw_game
     init_forest_level()
+    --switch_to_space_level()
 end
 
 function update_game()

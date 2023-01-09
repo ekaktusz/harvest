@@ -10,3 +10,9 @@ function draw_stones()
     end
 end
 
+function bear_collide_with_stone(stone)
+    --bear.eating = true
+    --freeze_bear(10)
+    del(stones, stone)
+    bear.num_eaten += 1
+end

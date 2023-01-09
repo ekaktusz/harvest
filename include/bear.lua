@@ -205,6 +205,8 @@ function update_controls_bear()
             bear_collide_with_objs(fishes, bear_collide_with_fish)
             if bear.level == 1 and bear.seen_stone then
                 bear_collide_with_objs(trees, bear_collide_with_tree)
+                bear_collide_with_objs(mountains, bear_collide_with_mountain)
+                bear_collide_with_objs(stones, bear_collide_with_stone)
             end
         end
         --if btnp(5) then

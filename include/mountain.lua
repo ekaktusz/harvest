@@ -7,3 +7,11 @@ function draw_mountains()
         spr(m.sprite,m.x,m.y,4,4)
     end
 end
+
+
+function bear_collide_with_mountain(mountain)
+    --bear.eating = true
+    --freeze_bear(10)
+    del(mountains, mountain)
+    bear.num_eaten += 1
+end
