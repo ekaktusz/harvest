@@ -285,7 +285,7 @@ function camera_follow_bear()
     --log(cam_y)
     --log(map_size_y - 64 + flr(bear.real_h / 2))
     if cam_y > (map_size_y - 128) then
-        log("aAA")
+        --log("aAA")
         cam_y = map_size_y - 128
     else
         cam_y = mid(0,cam_y,map_size_y) 
