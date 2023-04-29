@@ -9,13 +9,14 @@ Small narrative game created in PICO-8 for [Ludum Dare 52](https://ldjam.com/eve
 Enjoy!
 
 ## Controls
-Arrow keys - Move the bear
+Arrow keys - Move the bear <br />
 (X) - Action key / Eat
 
 ## Credits
-Zahkros - Game design, Music, SFX
-bartalomew - Game design, Art
+Zahkros - Game design, Music, SFX <br />
+bartalomew - Game design, Art <br />
 ekaktusz - Programming
+
 
 Special thanks to: _Dzsodzso_ (helped with the art, website, and with basically everything) and for _koeves_ for the music.
 
